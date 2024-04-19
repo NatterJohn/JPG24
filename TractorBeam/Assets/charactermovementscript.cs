@@ -197,7 +197,6 @@ public class charactermovementscript : MonoBehaviour
 
     private void setupMovement(Vector3 desiredDestination)
     {
-        
         if (!Physics.CheckSphere(desiredDestination, 0.45f))
         {
                 startLocation = transform.position;
@@ -205,12 +204,23 @@ public class charactermovementscript : MonoBehaviour
                 desiredLocation = desiredDestination;
                 isCurrently = characterStates.Moving;
         }
+    }
 
+    private void setupRotation(Vector3 direction)
+    {
+        if (Vector3.Dot(transform.forward, direction) < 0.9f)
+        {
+            startRotation = transform.rotation;
+            timer = 0;
+            desiredRotation = Quaternion.LookRotation(direction);
+            if (Vector3.Dot(transform.forward, direction) < -0.9f) multiplier = 2;
+            else multiplier = 1;
 
-        
-
+            isCurrently = characterStates.Rotating;
+        }
 
     }
+
 
     private void setupBeam()
     {
@@ -256,20 +266,7 @@ public class charactermovementscript : MonoBehaviour
         return null;
     }
 
-    private void setupRotation(Vector3 direction)
-    {
-        if (Vector3.Dot(transform.forward, direction) < 0.9f)
-        {
-            startRotation = transform.rotation;
-            timer = 0;
-            desiredRotation = Quaternion.LookRotation(direction);
-            if (Vector3.Dot(transform.forward, direction) < -0.9f) multiplier = 2;
-            else multiplier = 1;
-
-            isCurrently = characterStates.Rotating;
-        }
-
-    }
+    
 
     private bool isInsideArea(Vector3 desiredDestination)
     {

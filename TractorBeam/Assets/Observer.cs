@@ -29,27 +29,6 @@ public class Observer : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-       //MakeAllBlocksAppear();   
-    }
-    IEnumerable<MakeMeAppear> GetAll()
-    {
-        return AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(MakeMeAppear)))
-            .Select(type => Activator.CreateInstance(type) as MakeMeAppear);
-    }
-    private IEnumerator Log()
-    {
-        yield return new WaitForSeconds(2f);
-
-       
-
-        //Debug.Log("I am testing");
-        //onLog.Invoke();
-    }
-
     private void MakeAllBlocksAppear()
     {
         foreach (MakeMeAppear block in allBlocks)
