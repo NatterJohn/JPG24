@@ -13,13 +13,6 @@ public class gotothegame : MonoBehaviour
     }
     public void GoGame()
     {
-        if (SceneManager.GetActiveScene().buildIndex >= 2) {
-            myAudio.StopTheAudio();
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 0)
-            myAudio.StartTheAudio();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-
-        
     }
 }
